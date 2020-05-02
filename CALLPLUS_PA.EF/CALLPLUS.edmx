@@ -1,0 +1,1353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CALLPLUS_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Etapa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instancia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idLicenca" Type="int" />
+          <Property Name="idLogin" Type="int" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+          <Property Name="idCriadoPor" Type="int" Nullable="false" />
+          <Property Name="dataCriacao" Type="datetime" Nullable="false" />
+          <Property Name="dataFinalizacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LicencaPAM">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProcesso" Type="int" Nullable="false" />
+          <Property Name="idOrigemDaConsulta" Type="smallint" Nullable="false" />
+          <Property Name="idBancoDeOrigem" Type="smallint" Nullable="false" />
+          <Property Name="idServidorDeInstanciaDoRobo" Type="int" Nullable="false" />
+          <Property Name="dataInicio" Type="datetime" Nullable="false" />
+          <Property Name="dataTermino" Type="datetime" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+          <Property Name="bonus" Type="bit" Nullable="false" />
+          <Property Name="semInstanciaAtiva" Type="bit" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="senha" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+          <Property Name="dataCriacao" Type="datetime" Nullable="false" />
+          <Property Name="idCriadoPor" Type="int" Nullable="false" />
+          <Property Name="dataModificacao" Type="datetime" />
+          <Property Name="idModificadoPor" Type="int" />
+          <Property Name="dataUltimaUtilizacao" Type="datetime2" Precision="7" />
+          <Property Name="codigo" Type="nvarchar" MaxLength="10" />
+          <Property Name="backoffice" Type="bit" />
+          <Property Name="COMTA" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MensagemDoStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idStatusDoRegistro" Type="int" Nullable="false" />
+          <Property Name="idEtapa" Type="int" Nullable="false" />
+          <Property Name="mensagem" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MIG_RegistroDaInstancia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idInstancia" Type="int" Nullable="false" />
+          <Property Name="idStatus" Type="int" />
+          <Property Name="idVenda" Type="bigint" />
+          <Property Name="idControle" Type="bigint" />
+          <Property Name="dataInicio" Type="datetime" Nullable="false" />
+          <Property Name="dataTermino" Type="datetime" />
+          <Property Name="protocolo" Type="nvarchar" MaxLength="200" />
+          <Property Name="autorizacao" Type="nvarchar" MaxLength="200" />
+          <Property Name="rg" Type="nvarchar" MaxLength="200" />
+          <Property Name="rgMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="cpf" Type="nvarchar" MaxLength="200" />
+          <Property Name="cpfMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="vencimento" Type="nvarchar" MaxLength="200" />
+          <Property Name="vencimentoMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="tipoPagamento" Type="nvarchar" MaxLength="200" />
+          <Property Name="dadosBancarios" Type="nvarchar" MaxLength="200" />
+          <Property Name="codigoBanco" Type="nvarchar" MaxLength="200" />
+          <Property Name="dadosBancariosMarcados" Type="nvarchar" MaxLength="200" />
+          <Property Name="faturaDigital" Type="nvarchar" MaxLength="200" />
+          <Property Name="faturaDigitalMarcada" Type="nvarchar" MaxLength="200" />
+          <Property Name="plano" Type="nvarchar" MaxLength="200" />
+          <Property Name="planoMarcado" Type="nvarchar" MaxLength="500" />
+          <Property Name="promocaoMarcada" Type="nvarchar" MaxLength="500" />
+          <Property Name="nascimento" Type="nvarchar" MaxLength="200" />
+          <Property Name="nascimentoMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="nomeMae" Type="nvarchar" MaxLength="200" />
+          <Property Name="nomeMaeMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="email" Type="nvarchar" MaxLength="200" />
+          <Property Name="emailMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="cep" Type="nvarchar" MaxLength="200" />
+          <Property Name="cepMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="telResidencial" Type="nvarchar" MaxLength="200" />
+          <Property Name="telContatoMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="tipoLogradouro" Type="nvarchar" MaxLength="200" />
+          <Property Name="tipoLogradouroMarcado" Type="nvarchar" MaxLength="200" />
+          <Property Name="enderecoCompleto" Type="nvarchar" MaxLength="300" />
+          <Property Name="enderecoCompletoMarcado" Type="nvarchar" MaxLength="300" />
+          <Property Name="statusVenda" Type="nvarchar" MaxLength="16" />
+          <Property Name="descricao" Type="nvarchar" MaxLength="300" />
+          <Property Name="msisdn" Type="nvarchar" MaxLength="50" />
+          <Property Name="gravadoCRM" Type="bit" Nullable="false" />
+          <Property Name="idLogin" Type="int" />
+          <Property Name="idProcesso" Type="int" />
+          <Property Name="idOrigem" Type="int" Nullable="false" />
+          <Property Name="banco" Type="nvarchar" MaxLength="200" />
+          <Property Name="smsNovidadesMarcado" Type="nvarchar" MaxLength="50" />
+          <Property Name="COMTA" Type="nvarchar" MaxLength="50" />
+          <Property Name="COMTAAcessado" Type="nvarchar" MaxLength="50" />
+          <Property Name="servidorClaro" Type="nvarchar" MaxLength="100" />
+          <Property Name="versaoRobo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlanoDaVenda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Processo" Type="tinyint" Nullable="false" />
+          <Property Name="PlanoDoSite" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VerificarPlano" Type="varchar" MaxLength="100" />
+          <Property Name="Promocao" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Fabricante" Type="varchar" MaxLength="50" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" />
+          <Property Name="TipoCard" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ativo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Processo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="idArea" Type="int" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="aplicacao" Type="nvarchar" MaxLength="50" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+          <Property Name="rodando" Type="bit" Nullable="false" />
+          <Property Name="qtdContratada" Type="int" />
+          <Property Name="idCriadoPor" Type="int" Nullable="false" />
+          <Property Name="dataCriacao" Type="datetime" Nullable="false" />
+          <Property Name="idModificadoPor" Type="int" Nullable="false" />
+          <Property Name="dataModificacao" Type="datetime" Nullable="false" />
+          <Property Name="anotacoes" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="StatusDoRegistro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="idStatusCRM" Type="int" Nullable="false" />
+          <Property Name="idStatusNovoCRM" Type="int" />
+          <Property Name="nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+          <Property Name="divisao" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TiposLogradouro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeAbre" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Instancia_Login">
+          <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+          <End Role="Instancia" Type="Self.Instancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Instancia">
+              <PropertyRef Name="idLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LicencaPAM_Processo">
+          <End Role="Processo" Type="Self.Processo" Multiplicity="1" />
+          <End Role="LicencaPAM" Type="Self.LicencaPAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LicencaPAM">
+              <PropertyRef Name="idProcesso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MensagemDoStatus_Etapa">
+          <End Role="Etapa" Type="Self.Etapa" Multiplicity="1" />
+          <End Role="MensagemDoStatus" Type="Self.MensagemDoStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MensagemDoStatus">
+              <PropertyRef Name="idEtapa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MensagemDoStatus_StatusDoRegistro">
+          <End Role="StatusDoRegistro" Type="Self.StatusDoRegistro" Multiplicity="1" />
+          <End Role="MensagemDoStatus" Type="Self.MensagemDoStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusDoRegistro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MensagemDoStatus">
+              <PropertyRef Name="idStatusDoRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDaInstanciaMIG_Instancia">
+          <End Role="Instancia" Type="Self.Instancia" Multiplicity="1" />
+          <End Role="MIG_RegistroDaInstancia" Type="Self.MIG_RegistroDaInstancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instancia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MIG_RegistroDaInstancia">
+              <PropertyRef Name="idInstancia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDaInstanciaMIG_StatusDoRegistro">
+          <End Role="StatusDoRegistro" Type="Self.StatusDoRegistro" Multiplicity="0..1" />
+          <End Role="MIG_RegistroDaInstancia" Type="Self.MIG_RegistroDaInstancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusDoRegistro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MIG_RegistroDaInstancia">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="APP_ATUALIZAR_DIA_VENCIMENTO_FATURA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="verificar" Type="bit" Mode="In" />
+          <Parameter Name="diaVencimento" Type="nvarchar" Mode="In" />
+          <Parameter Name="fechamentoFatura" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AtualizarVersaoRobo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+          <Parameter Name="processo" Type="varchar" Mode="In" />
+          <Parameter Name="versao" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="BuscarDadosDaInstancia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BuscarLoginDisponivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProcesso" Type="int" Mode="In" />
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="BuscarLoginEspecifico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProcesso" Type="int" Mode="In" />
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+          <Parameter Name="COMTA" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="FinalizarInstancia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarInstanciaInativa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="servidor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ListarLicencaSemInstancia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="servidor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ListarMensagemDoStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEtapa" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ListarResultadoDaInstancia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MIG_BuscarVendaParaRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+          <Parameter Name="crivada" Type="bit" Mode="In" />
+          <Parameter Name="verificacao" Type="bit" Mode="In" />
+          <Parameter Name="operacao" Type="int" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="MIG_FinalizarRegistroDaInstancia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVenda" Type="bigint" Mode="In" />
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+          <Parameter Name="idStatus" Type="int" Mode="In" />
+          <Parameter Name="protocolo" Type="nvarchar" Mode="In" />
+          <Parameter Name="autorizacao" Type="nvarchar" Mode="In" />
+          <Parameter Name="rg" Type="nvarchar" Mode="In" />
+          <Parameter Name="rgMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="cpf" Type="nvarchar" Mode="In" />
+          <Parameter Name="cpfMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="vencimento" Type="nvarchar" Mode="In" />
+          <Parameter Name="vencimentoMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoPagamento" Type="nvarchar" Mode="In" />
+          <Parameter Name="dadosBancarios" Type="nvarchar" Mode="In" />
+          <Parameter Name="codigoBanco" Type="nvarchar" Mode="In" />
+          <Parameter Name="dadosBancariosMarcados" Type="nvarchar" Mode="In" />
+          <Parameter Name="faturaDigital" Type="nvarchar" Mode="In" />
+          <Parameter Name="faturaDigitalMarcada" Type="nvarchar" Mode="In" />
+          <Parameter Name="plano" Type="nvarchar" Mode="In" />
+          <Parameter Name="planoMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="promocaoMarcada" Type="nvarchar" Mode="In" />
+          <Parameter Name="nascimento" Type="nvarchar" Mode="In" />
+          <Parameter Name="nascimentoMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomeMae" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomeMaeMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="emailMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="smsNovidadesMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="cep" Type="nvarchar" Mode="In" />
+          <Parameter Name="cepMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="telResidencial" Type="nvarchar" Mode="In" />
+          <Parameter Name="telContatoMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoLogradouro" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoLogradouroMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="enderecoCompleto" Type="nvarchar" Mode="In" />
+          <Parameter Name="enderecoCompletoMarcado" Type="nvarchar" Mode="In" />
+          <Parameter Name="COMTA" Type="nvarchar" Mode="In" />
+          <Parameter Name="COMTAAcessado" Type="nvarchar" Mode="In" />
+          <Parameter Name="servidorClaro" Type="nvarchar" Mode="In" />
+          <Parameter Name="versaoRobo" Type="nvarchar" Mode="In" />
+          <Parameter Name="idProcesso" Type="int" Mode="In" />
+          <Parameter Name="statusVenda" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descricao" Type="varchar" Mode="In" />
+          <Parameter Name="msisdn" Type="varchar" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+          <Parameter Name="posicao" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SelecionarPlanoDaVenda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idProcesso" Type="int" Mode="In" />
+          <Parameter Name="Nome" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="VerificaDuplicidadeDeRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idInstancia" Type="int" Mode="In" />
+          <Parameter Name="idVenda" Type="int" Mode="In" />
+          <Parameter Name="idProcesso" Type="int" Mode="In" />
+          <Parameter Name="banco" Type="varchar" Mode="In" />
+          <Parameter Name="idProduto" Type="int" Mode="In" />
+          <Parameter Name="deletar" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="CALLPLUS_ModelStoreContainer">
+          <EntitySet Name="Etapa" EntityType="Self.Etapa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instancia" EntityType="Self.Instancia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LicencaPAM" EntityType="Self.LicencaPAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MensagemDoStatus" EntityType="Self.MensagemDoStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MIG_RegistroDaInstancia" EntityType="Self.MIG_RegistroDaInstancia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanoDaVenda" EntityType="Self.PlanoDaVenda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Processo" EntityType="Self.Processo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusDoRegistro" EntityType="Self.StatusDoRegistro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposLogradouro" EntityType="Self.TiposLogradouro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Instancia_Login" Association="Self.FK_Instancia_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Instancia" EntitySet="Instancia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LicencaPAM_Processo" Association="Self.FK_LicencaPAM_Processo">
+            <End Role="Processo" EntitySet="Processo" />
+            <End Role="LicencaPAM" EntitySet="LicencaPAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MensagemDoStatus_Etapa" Association="Self.FK_MensagemDoStatus_Etapa">
+            <End Role="Etapa" EntitySet="Etapa" />
+            <End Role="MensagemDoStatus" EntitySet="MensagemDoStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MensagemDoStatus_StatusDoRegistro" Association="Self.FK_MensagemDoStatus_StatusDoRegistro">
+            <End Role="StatusDoRegistro" EntitySet="StatusDoRegistro" />
+            <End Role="MensagemDoStatus" EntitySet="MensagemDoStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDaInstanciaMIG_Instancia" Association="Self.FK_RegistroDaInstanciaMIG_Instancia">
+            <End Role="Instancia" EntitySet="Instancia" />
+            <End Role="MIG_RegistroDaInstancia" EntitySet="MIG_RegistroDaInstancia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDaInstanciaMIG_StatusDoRegistro" Association="Self.FK_RegistroDaInstanciaMIG_StatusDoRegistro">
+            <End Role="StatusDoRegistro" EntitySet="StatusDoRegistro" />
+            <End Role="MIG_RegistroDaInstancia" EntitySet="MIG_RegistroDaInstancia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CALLPLUS_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Processo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="idArea" Type="Int32" Nullable="false" />
+          <Property Name="rodando" Type="Boolean" Nullable="false" />
+          <Property Name="idCriadoPor" Type="Int32" Nullable="false" />
+          <Property Name="dataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idModificadoPor" Type="Int32" Nullable="false" />
+          <Property Name="dataModificacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="anotacoes" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="qtdContratada" Type="Int32" />
+          <Property Name="codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LicencaPAM" Relationship="CALLPLUS_Model.FK_LicencaPAM_Processo" FromRole="Processo" ToRole="LicencaPAM" />
+          <Property Name="aplicacao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="CALLPLUS_Entities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="Processo" EntityType="Self.Processo" />
+          <FunctionImport Name="ListarLogin" ReturnType="Collection(CALLPLUS_Model.ListarLogin_Result)">
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="ativo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="ListarUsuario" ReturnType="Collection(CALLPLUS_Model.ListarUsuario_Result)" />
+          <EntitySet Name="Etapa" EntityType="CALLPLUS_Model.Etapa" />
+          <EntitySet Name="MensagemDoStatus" EntityType="CALLPLUS_Model.MensagemDoStatus" />
+          <AssociationSet Name="FK_MensagemDoStatus_Etapa" Association="CALLPLUS_Model.FK_MensagemDoStatus_Etapa">
+            <End Role="Etapa" EntitySet="Etapa" />
+            <End Role="MensagemDoStatus" EntitySet="MensagemDoStatus" />
+          </AssociationSet>
+          <FunctionImport Name="ListarProcesso" ReturnType="Collection(CALLPLUS_Model.ListarProcesso_Result)" />
+          <FunctionImport Name="ListarResultadoDaInstancia" ReturnType="Collection(CALLPLUS_Model.ListarResultadoDaInstancia_Result)">
+          <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarLicencaPAM" ReturnType="Collection(CALLPLUS_Model.BuscarLicencaPAM_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarLicencaSemInstancia" ReturnType="Collection(CALLPLUS_Model.ListarLicencaSemInstancia_Result)">
+          <Parameter Name="servidor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FinalizarInstancia">
+          <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarLoginDisponivel" EntitySet="Login" ReturnType="Collection(CALLPLUS_Model.Login)">
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ListarMensagemDoStatus" ReturnType="Collection(CALLPLUS_Model.ListarMensagemDoStatus_Result)">
+          <Parameter Name="idEtapa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ListarInstanciaInativa" ReturnType="Collection(Int32)">
+          <Parameter Name="servidor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarDadosDaInstancia" ReturnType="Collection(CALLPLUS_Model.BuscarDadosDaInstancia_Result)">
+          <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Instancia" EntityType="CALLPLUS_Model.Instancia" />
+          <EntitySet Name="LicencaPAM" EntityType="CALLPLUS_Model.LicencaPAM" />
+          <AssociationSet Name="FK_Instancia_LicencaPAM" Association="CALLPLUS_Model.FK_Instancia_LicencaPAM">
+            <End Role="LicencaPAM" EntitySet="LicencaPAM" />
+            <End Role="Instancia" EntitySet="Instancia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LicencaPAM_Processo" Association="CALLPLUS_Model.FK_LicencaPAM_Processo">
+            <End Role="Processo" EntitySet="Processo" />
+            <End Role="LicencaPAM" EntitySet="LicencaPAM" />
+          </AssociationSet>
+          <FunctionImport Name="VerificaDuplicidadeDeRegistro" ReturnType="Collection(CALLPLUS_Model.VerificaDuplicidadeDeRegistro_Result)">
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="idVenda" Mode="In" Type="Int32" />
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="idProduto" Mode="In" Type="Int32" />
+            <Parameter Name="deletar" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SelecionarPlanoDaVenda" ReturnType="Collection(CALLPLUS_Model.SelecionarPlanoDaVenda_Result)">
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="Nome" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MIG_FinalizarRegistroDaInstancia">
+            <Parameter Name="idVenda" Mode="In" Type="Int64" />
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="idStatus" Mode="In" Type="Int32" />
+            <Parameter Name="protocolo" Mode="In" Type="String" />
+            <Parameter Name="autorizacao" Mode="In" Type="String" />
+            <Parameter Name="rg" Mode="In" Type="String" />
+            <Parameter Name="rgMarcado" Mode="In" Type="String" />
+            <Parameter Name="cpf" Mode="In" Type="String" />
+            <Parameter Name="cpfMarcado" Mode="In" Type="String" />
+            <Parameter Name="vencimento" Mode="In" Type="String" />
+            <Parameter Name="vencimentoMarcado" Mode="In" Type="String" />
+            <Parameter Name="tipoPagamento" Mode="In" Type="String" />
+            <Parameter Name="dadosBancarios" Mode="In" Type="String" />
+            <Parameter Name="codigoBanco" Mode="In" Type="String" />
+            <Parameter Name="dadosBancariosMarcados" Mode="In" Type="String" />
+            <Parameter Name="faturaDigital" Mode="In" Type="String" />
+            <Parameter Name="faturaDigitalMarcada" Mode="In" Type="String" />
+            <Parameter Name="plano" Mode="In" Type="String" />
+            <Parameter Name="planoMarcado" Mode="In" Type="String" />
+            <Parameter Name="promocaoMarcada" Mode="In" Type="String" />
+            <Parameter Name="nascimento" Mode="In" Type="String" />
+            <Parameter Name="nascimentoMarcado" Mode="In" Type="String" />
+            <Parameter Name="nomeMae" Mode="In" Type="String" />
+            <Parameter Name="nomeMaeMarcado" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="emailMarcado" Mode="In" Type="String" />
+            <Parameter Name="smsNovidadesMarcado" Mode="In" Type="String" />
+            <Parameter Name="cep" Mode="In" Type="String" />
+            <Parameter Name="cepMarcado" Mode="In" Type="String" />
+            <Parameter Name="telResidencial" Mode="In" Type="String" />
+            <Parameter Name="telContatoMarcado" Mode="In" Type="String" />
+            <Parameter Name="tipoLogradouro" Mode="In" Type="String" />
+            <Parameter Name="tipoLogradouroMarcado" Mode="In" Type="String" />
+            <Parameter Name="enderecoCompleto" Mode="In" Type="String" />
+            <Parameter Name="enderecoCompletoMarcado" Mode="In" Type="String" />
+            <Parameter Name="COMTA" Mode="In" Type="String" />
+            <Parameter Name="COMTAAcessado" Mode="In" Type="String" />
+            <Parameter Name="servidorClaro" Mode="In" Type="String" />
+            <Parameter Name="versaoRobo" Mode="In" Type="String" />
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="statusVenda" Mode="In" Type="String" />
+            <Parameter Name="Descricao" Mode="In" Type="String" />
+            <Parameter Name="msisdn" Mode="In" Type="String" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="posicao" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MIG_BuscarVendaParaRegistro" ReturnType="Collection(CALLPLUS_Model.BuscarVendaParaRegistro_Result)">
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="crivada" Mode="In" Type="Boolean" />
+            <Parameter Name="verificacao" Mode="In" Type="Boolean" />
+            <Parameter Name="operacao" Mode="In" Type="Int32" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AtualizarMensagemDoStatus">
+            <Parameter Name="mensagem" Mode="In" Type="String" />
+            <Parameter Name="etapa" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AtualizarVersaoRobo">
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="processo" Mode="In" Type="String" />
+            <Parameter Name="versao" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarLoginEspecifico" EntitySet="Login" ReturnType="Collection(CALLPLUS_Model.Login)">
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="COMTA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MIG_FinalizarRegistroDaInstanciaTeste">
+            <Parameter Name="idVenda" Mode="In" Type="Int64" />
+            <Parameter Name="idInstancia" Mode="In" Type="Int32" />
+            <Parameter Name="idStatus" Mode="In" Type="Int32" />
+            <Parameter Name="protocolo" Mode="In" Type="String" />
+            <Parameter Name="autorizacao" Mode="In" Type="String" />
+            <Parameter Name="rg" Mode="In" Type="String" />
+            <Parameter Name="rgMarcado" Mode="In" Type="String" />
+            <Parameter Name="cpf" Mode="In" Type="String" />
+            <Parameter Name="cpfMarcado" Mode="In" Type="String" />
+            <Parameter Name="vencimento" Mode="In" Type="String" />
+            <Parameter Name="vencimentoMarcado" Mode="In" Type="String" />
+            <Parameter Name="tipoPagamento" Mode="In" Type="String" />
+            <Parameter Name="dadosBancarios" Mode="In" Type="String" />
+            <Parameter Name="codigoBanco" Mode="In" Type="String" />
+            <Parameter Name="dadosBancariosMarcados" Mode="In" Type="String" />
+            <Parameter Name="faturaDigital" Mode="In" Type="String" />
+            <Parameter Name="faturaDigitalMarcada" Mode="In" Type="String" />
+            <Parameter Name="plano" Mode="In" Type="String" />
+            <Parameter Name="planoMarcado" Mode="In" Type="String" />
+            <Parameter Name="promocaoMarcada" Mode="In" Type="String" />
+            <Parameter Name="nascimento" Mode="In" Type="String" />
+            <Parameter Name="nascimentoMarcado" Mode="In" Type="String" />
+            <Parameter Name="nomeMae" Mode="In" Type="String" />
+            <Parameter Name="nomeMaeMarcado" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="emailMarcado" Mode="In" Type="String" />
+            <Parameter Name="smsNovidadeMarcado" Mode="In" Type="String" />
+            <Parameter Name="cep" Mode="In" Type="String" />
+            <Parameter Name="cepMarcado" Mode="In" Type="String" />
+            <Parameter Name="telResidencial" Mode="In" Type="String" />
+            <Parameter Name="telContatoMarcado" Mode="In" Type="String" />
+            <Parameter Name="tipoLogradouro" Mode="In" Type="String" />
+            <Parameter Name="tipoLogradouroMarcado" Mode="In" Type="String" />
+            <Parameter Name="enderecoCompleto" Mode="In" Type="String" />
+            <Parameter Name="enderecoCompletoMarcado" Mode="In" Type="String" />
+            <Parameter Name="COMTA" Mode="In" Type="String" />
+            <Parameter Name="COMTAAcessado" Mode="In" Type="String" />
+            <Parameter Name="idProcesso" Mode="In" Type="Int32" />
+            <Parameter Name="statusVenda" Mode="In" Type="String" />
+            <Parameter Name="Descricao" Mode="In" Type="String" />
+            <Parameter Name="msisdn" Mode="In" Type="String" />
+            <Parameter Name="banco" Mode="In" Type="String" />
+            <Parameter Name="posicao" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="PlanoDaVenda" EntityType="CALLPLUS_Model.PlanoDaVenda" />
+          <FunctionImport Name="APP_ATUALIZAR_DIA_VENCIMENTO_FATURA" ReturnType="Collection(CALLPLUS_Model.APP_ATUALIZAR_DIA_VENCIMENTO_FATURA_Result)">
+            <Parameter Name="verificar" Mode="In" Type="Boolean" />
+            <Parameter Name="diaVencimento" Mode="In" Type="String" />
+            <Parameter Name="fechamentoFatura" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TiposLogradouro" EntityType="CALLPLUS_Model.TiposLogradouro" />
+          <EntitySet Name="Login" EntityType="CALLPLUS_Model.Login" />
+          <AssociationSet Name="FK_Instancia_Login" Association="CALLPLUS_Model.FK_Instancia_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Instancia" EntitySet="Instancia" />
+          </AssociationSet>
+          <EntitySet Name="MIG_RegistroDaInstancia" EntityType="CALLPLUS_Model.MIG_RegistroDaInstancia" />
+          <AssociationSet Name="FK_RegistroDaInstanciaMIG_Instancia" Association="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_Instancia">
+            <End Role="Instancia" EntitySet="Instancia" />
+            <End Role="MIG_RegistroDaInstancia" EntitySet="MIG_RegistroDaInstancia" />
+          </AssociationSet>
+          <EntitySet Name="StatusDoRegistro" EntityType="CALLPLUS_Model.StatusDoRegistro" />
+          <AssociationSet Name="FK_MensagemDoStatus_StatusDoRegistro" Association="CALLPLUS_Model.FK_MensagemDoStatus_StatusDoRegistro">
+            <End Role="StatusDoRegistro" EntitySet="StatusDoRegistro" />
+            <End Role="MensagemDoStatus" EntitySet="MensagemDoStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistroDaInstanciaMIG_StatusDoRegistro" Association="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_StatusDoRegistro">
+            <End Role="StatusDoRegistro" EntitySet="StatusDoRegistro" />
+            <End Role="MIG_RegistroDaInstancia" EntitySet="MIG_RegistroDaInstancia" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="ListarLogin_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="senha" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="agente" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="maximoRegistros" Nullable="true" />
+          <Property Type="DateTime" Name="horaInicio" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="horaTermino" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="registroIlimitado" Nullable="false" />
+          <Property Type="Boolean" Name="horarioIlimitado" Nullable="false" />
+          <Property Type="Boolean" Name="emUso" Nullable="false" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+          <Property Type="DateTime" Name="dataUtilizacao" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="ListarResultadoDaInstancia_Result">
+          <Property Type="String" Name="STATUS" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="QUANTIDADE" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ListarUsuario_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="login" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="senha" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Etapa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MensagemDoStatus" Relationship="CALLPLUS_Model.FK_MensagemDoStatus_Etapa" FromRole="Etapa" ToRole="MensagemDoStatus" />
+        </EntityType>
+        <EntityType Name="MensagemDoStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idStatusDoRegistro" Type="Int32" Nullable="false" />
+          <Property Name="idEtapa" Type="Int32" Nullable="false" />
+          <Property Name="mensagem" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Etapa" Relationship="CALLPLUS_Model.FK_MensagemDoStatus_Etapa" FromRole="MensagemDoStatus" ToRole="Etapa" />
+          <NavigationProperty Name="StatusDoRegistro" Relationship="CALLPLUS_Model.FK_MensagemDoStatus_StatusDoRegistro" FromRole="MensagemDoStatus" ToRole="StatusDoRegistro" />
+        </EntityType>
+        <Association Name="FK_MensagemDoStatus_Etapa">
+          <End Type="CALLPLUS_Model.Etapa" Role="Etapa" Multiplicity="1" />
+          <End Type="CALLPLUS_Model.MensagemDoStatus" Role="MensagemDoStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MensagemDoStatus">
+              <PropertyRef Name="idEtapa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="ListarMensagemDoStatus_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="idStatusDoRegistro" Nullable="false" />
+          <Property Type="Int32" Name="idEtapa" Nullable="false" />
+          <Property Type="String" Name="mensagem" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ListarProcesso_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="BuscarLicencaPAM_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="idProcesso" Nullable="false" />
+          <Property Type="Int32" Name="idOrigemDaConsulta" Nullable="true" />
+          <Property Type="String" Name="banco" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="dataInicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="dataTermino" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+          <Property Type="Boolean" Name="reiniciar" Nullable="false" />
+          <Property Type="String" Name="processo" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ListarLicencaSemInstancia_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="idProcesso" Nullable="false" />
+          <Property Type="Int32" Name="idOrigemDaConsulta" Nullable="true" />
+          <Property Type="String" Name="banco" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="dataInicio" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="dataTermino" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+          <Property Type="String" Name="processo" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="Instancia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLicenca" Type="Int32" />
+          <Property Name="idLogin" Type="Int32" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="idCriadoPor" Type="Int32" Nullable="false" />
+          <Property Name="dataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LicencaPAM" Relationship="CALLPLUS_Model.FK_Instancia_LicencaPAM" FromRole="Instancia" ToRole="LicencaPAM" />
+          <Property Name="dataFinalizacao" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Login" Relationship="CALLPLUS_Model.FK_Instancia_Login" FromRole="Instancia" ToRole="Login" />
+          <NavigationProperty Name="MIG_RegistroDaInstancia" Relationship="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_Instancia" FromRole="Instancia" ToRole="MIG_RegistroDaInstancia" />
+        </EntityType>
+        <ComplexType Name="BuscarDadosDaInstancia_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="idLicenca" Nullable="true" />
+          <Property Type="Int32" Name="idLogin" Nullable="true" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+          <Property Type="Int32" Name="idCriadoPor" Nullable="false" />
+          <Property Type="DateTime" Name="dataCriacao" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="idProcesso" Nullable="false" />
+          <Property Type="String" Name="banco" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="BuscarLoginDisponivel_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="usuario" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="senha" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+          <Property Type="DateTime" Name="dataCriacao" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="idCriadoPor" Nullable="false" />
+          <Property Type="DateTime" Name="dataModificacao" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="idModificadoPor" Nullable="true" />
+          <Property Type="DateTime" Name="dataUltimaUtilizacao" Nullable="true" />
+          <Property Type="String" Name="codigo" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="backoffice" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="LicencaPAM">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProcesso" Type="Int32" Nullable="false" />
+          <Property Name="idOrigemDaConsulta" Type="Int16" Nullable="false" />
+          <Property Name="idBancoDeOrigem" Type="Int16" Nullable="false" />
+          <Property Name="idServidorDeInstanciaDoRobo" Type="Int32" Nullable="false" />
+          <Property Name="dataInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dataTermino" Type="DateTime" Precision="3" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="bonus" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Instancia" Relationship="CALLPLUS_Model.FK_Instancia_LicencaPAM" FromRole="LicencaPAM" ToRole="Instancia" />
+          <NavigationProperty Name="Processo" Relationship="CALLPLUS_Model.FK_LicencaPAM_Processo" FromRole="LicencaPAM" ToRole="Processo" />
+          <Property Name="semInstanciaAtiva" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Instancia_LicencaPAM">
+          <End Type="CALLPLUS_Model.LicencaPAM" Role="LicencaPAM" Multiplicity="0..1" />
+          <End Type="CALLPLUS_Model.Instancia" Role="Instancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LicencaPAM">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Instancia">
+              <PropertyRef Name="idLicenca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LicencaPAM_Processo">
+          <End Type="CALLPLUS_Model.Processo" Role="Processo" Multiplicity="1" />
+          <End Type="CALLPLUS_Model.LicencaPAM" Role="LicencaPAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Processo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="LicencaPAM">
+              <PropertyRef Name="idProcesso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="VerificaDuplicidadeDeRegistro_Result">
+          <Property Type="Int32" Name="idInstancia" Nullable="false" />
+          <Property Type="DateTime" Name="dataInicio" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SelecionarPlanoDaVenda_Result">
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Promocao" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="PlanoDoSite" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Fabricante" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TipoCard" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="VerificarPlano" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="BuscarVendaParaRegistro_Result" >
+          <Property Type="String" Name="agencia" Nullable="false" />
+          <Property Type="String" Name="bairro" Nullable="false" />
+          <Property Type="String" Name="banco" Nullable="false" />
+          <Property Type="String" Name="cep" Nullable="false" />
+          <Property Type="String" Name="cidade" Nullable="false" />
+          <Property Type="String" Name="complemento" Nullable="false" />
+          <Property Type="String" Name="conta" Nullable="false" />
+          <Property Type="String" Name="cpf" Nullable="false" />
+          <Property Type="String" Name="dataNascimento" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" />
+          <Property Type="String" Name="faturaDigital" Nullable="false" />
+          <Property Type="String" Name="logradouro" Nullable="false" />
+          <Property Type="String" Name="msisdn" Nullable="false" />
+          <Property Type="String" Name="nome" Nullable="false" />
+          <Property Type="String" Name="nomeMae" Nullable="false" />
+          <Property Type="String" Name="numero" Nullable="false" />
+          <Property Type="String" Name="plano" Nullable="false" />
+          <Property Type="String" Name="pontoReferencia" Nullable="false" />
+          <Property Type="String" Name="produto" Nullable="false" />
+          <Property Type="String" Name="rg" Nullable="false" />
+          <Property Type="String" Name="telCelular" Nullable="false" />
+          <Property Type="String" Name="telRecado" Nullable="false" />
+          <Property Type="String" Name="telResidencial" Nullable="false" />
+          <Property Type="String" Name="UF" Nullable="false" />
+          <Property Type="String" Name="vencimento" Nullable="false" />
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="statusVenda" Nullable="false" />
+          <Property Type="String" Name="COMTA" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MIG_BuscarVendaParaRegistro_Result" >
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="nome" Nullable="false" />
+          <Property Type="String" Name="cpf" Nullable="false" />
+          <Property Type="String" Name="rg" Nullable="false" />
+          <Property Type="String" Name="dataNascimento" Nullable="false" />
+          <Property Type="String" Name="nomeMae" Nullable="false" />
+          <Property Type="String" Name="telResidencial" Nullable="false" />
+          <Property Type="String" Name="telCelular" Nullable="false" />
+          <Property Type="String" Name="telRecado" Nullable="false" />
+          <Property Type="String" Name="cep" Nullable="false" />
+          <Property Type="String" Name="logradouro" Nullable="false" />
+          <Property Type="String" Name="numero" Nullable="false" />
+          <Property Type="String" Name="complemento" Nullable="false" />
+          <Property Type="String" Name="pontoReferencia" Nullable="false" />
+          <Property Type="String" Name="bairro" Nullable="false" />
+          <Property Type="String" Name="cidade" Nullable="false" />
+          <Property Type="String" Name="UF" Nullable="false" />
+          <Property Type="String" Name="plano" Nullable="false" />
+          <Property Type="String" Name="vencimento" Nullable="false" />
+          <Property Type="String" Name="banco" Nullable="false" />
+          <Property Type="String" Name="agencia" Nullable="false" />
+          <Property Type="String" Name="conta" Nullable="false" />
+          <Property Type="String" Name="msisdn" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" />
+          <Property Type="String" Name="produto" Nullable="false" />
+          <Property Type="String" Name="faturaDigital" Nullable="false" />
+          <Property Type="String" Name="statusVenda" Nullable="false" />
+          <Property Type="String" Name="COMTA" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="PlanoDaVenda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Processo" Type="Byte" Nullable="false" />
+          <Property Name="PlanoDoSite" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VerificarPlano" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Promocao" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fabricante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoCard" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ativo" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="APP_ATUALIZAR_DIA_VENCIMENTO_FATURA_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="diaVencimento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fechamentoFatura" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="dataCaptura" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="TiposLogradouro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeAbre" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="dataCriacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCriadoPor" Type="Int32" Nullable="false" />
+          <Property Name="dataModificacao" Type="DateTime" Precision="3" />
+          <Property Name="idModificadoPor" Type="Int32" />
+          <Property Name="dataUltimaUtilizacao" Type="DateTime" Precision="7" />
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="backoffice" Type="Boolean" />
+          <Property Name="COMTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Instancia" Relationship="CALLPLUS_Model.FK_Instancia_Login" FromRole="Login" ToRole="Instancia" />
+        </EntityType>
+        <Association Name="FK_Instancia_Login">
+          <End Type="CALLPLUS_Model.Login" Role="Login" Multiplicity="0..1" />
+          <End Type="CALLPLUS_Model.Instancia" Role="Instancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Instancia">
+              <PropertyRef Name="idLogin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MIG_RegistroDaInstancia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idInstancia" Type="Int32" Nullable="false" />
+          <Property Name="idStatus" Type="Int32" />
+          <Property Name="idVenda" Type="Int64" />
+          <Property Name="idControle" Type="Int64" />
+          <Property Name="dataInicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="dataTermino" Type="DateTime" Precision="3" />
+          <Property Name="protocolo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="autorizacao" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="rg" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="rgMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cpf" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cpfMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="vencimento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="vencimentoMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tipoPagamento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="dadosBancarios" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="codigoBanco" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="dadosBancariosMarcados" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="faturaDigital" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="faturaDigitalMarcada" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="plano" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="planoMarcado" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="promocaoMarcada" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nascimento" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="nascimentoMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="nomeMae" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="nomeMaeMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="emailMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cep" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cepMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="telResidencial" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="telContatoMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tipoLogradouro" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tipoLogradouroMarcado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="enderecoCompleto" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="enderecoCompletoMarcado" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="statusVenda" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="descricao" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="msisdn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="gravadoCRM" Type="Boolean" Nullable="false" />
+          <Property Name="idLogin" Type="Int32" />
+          <Property Name="idProcesso" Type="Int32" />
+          <Property Name="idOrigem" Type="Int32" Nullable="false" />
+          <Property Name="banco" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="smsNovidadesMarcado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMTA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMTAAcessado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="servidorClaro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="versaoRobo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Instancia" Relationship="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_Instancia" FromRole="MIG_RegistroDaInstancia" ToRole="Instancia" />
+          <NavigationProperty Name="StatusDoRegistro" Relationship="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_StatusDoRegistro" FromRole="MIG_RegistroDaInstancia" ToRole="StatusDoRegistro" />
+        </EntityType>
+        <Association Name="FK_RegistroDaInstanciaMIG_Instancia">
+          <End Type="CALLPLUS_Model.Instancia" Role="Instancia" Multiplicity="1" />
+          <End Type="CALLPLUS_Model.MIG_RegistroDaInstancia" Role="MIG_RegistroDaInstancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instancia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MIG_RegistroDaInstancia">
+              <PropertyRef Name="idInstancia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StatusDoRegistro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idStatusCRM" Type="Int32" Nullable="false" />
+          <Property Name="idStatusNovoCRM" Type="Int32" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="divisao" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="MensagemDoStatus" Relationship="CALLPLUS_Model.FK_MensagemDoStatus_StatusDoRegistro" FromRole="StatusDoRegistro" ToRole="MensagemDoStatus" />
+          <NavigationProperty Name="MIG_RegistroDaInstancia" Relationship="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_StatusDoRegistro" FromRole="StatusDoRegistro" ToRole="MIG_RegistroDaInstancia" />
+        </EntityType>
+        <Association Name="FK_MensagemDoStatus_StatusDoRegistro">
+          <End Type="CALLPLUS_Model.StatusDoRegistro" Role="StatusDoRegistro" Multiplicity="1" />
+          <End Type="CALLPLUS_Model.MensagemDoStatus" Role="MensagemDoStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusDoRegistro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MensagemDoStatus">
+              <PropertyRef Name="idStatusDoRegistro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistroDaInstanciaMIG_StatusDoRegistro">
+          <End Type="CALLPLUS_Model.StatusDoRegistro" Role="StatusDoRegistro" Multiplicity="0..1" />
+          <End Type="CALLPLUS_Model.MIG_RegistroDaInstancia" Role="MIG_RegistroDaInstancia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusDoRegistro">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MIG_RegistroDaInstancia">
+              <PropertyRef Name="idStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CALLPLUS_ModelStoreContainer" CdmEntityContainer="CALLPLUS_Entities">
+          <EntitySetMapping Name="Processo">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.Processo">
+              <MappingFragment StoreEntitySet="Processo">
+                <ScalarProperty Name="aplicacao" ColumnName="aplicacao" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="qtdContratada" ColumnName="qtdContratada" />
+                <ScalarProperty Name="anotacoes" ColumnName="anotacoes" />
+                <ScalarProperty Name="dataModificacao" ColumnName="dataModificacao" />
+                <ScalarProperty Name="idModificadoPor" ColumnName="idModificadoPor" />
+                <ScalarProperty Name="dataCriacao" ColumnName="dataCriacao" />
+                <ScalarProperty Name="idCriadoPor" ColumnName="idCriadoPor" />
+                <ScalarProperty Name="rodando" ColumnName="rodando" />
+                <ScalarProperty Name="idArea" ColumnName="idArea" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etapa">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.Etapa">
+              <MappingFragment StoreEntitySet="Etapa">
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MensagemDoStatus">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.MensagemDoStatus">
+              <MappingFragment StoreEntitySet="MensagemDoStatus">
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="mensagem" ColumnName="mensagem" />
+                <ScalarProperty Name="idEtapa" ColumnName="idEtapa" />
+                <ScalarProperty Name="idStatusDoRegistro" ColumnName="idStatusDoRegistro" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ListarResultadoDaInstancia" FunctionName="CALLPLUS_Model.Store.ListarResultadoDaInstancia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.ListarResultadoDaInstancia_Result">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="QUANTIDADE" ColumnName="QUANTIDADE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarLicencaSemInstancia" FunctionName="CALLPLUS_Model.Store.ListarLicencaSemInstancia">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.ListarLicencaSemInstancia_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idProcesso" ColumnName="idProcesso" />
+                <ScalarProperty Name="idOrigemDaConsulta" ColumnName="idOrigemDaConsulta" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="dataInicio" ColumnName="dataInicio" />
+                <ScalarProperty Name="dataTermino" ColumnName="dataTermino" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="processo" ColumnName="processo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FinalizarInstancia" FunctionName="CALLPLUS_Model.Store.FinalizarInstancia" />
+          <FunctionImportMapping FunctionImportName="BuscarLoginDisponivel" FunctionName="CALLPLUS_Model.Store.BuscarLoginDisponivel">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarMensagemDoStatus" FunctionName="CALLPLUS_Model.Store.ListarMensagemDoStatus">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.ListarMensagemDoStatus_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idStatusDoRegistro" ColumnName="idStatusDoRegistro" />
+                <ScalarProperty Name="idEtapa" ColumnName="idEtapa" />
+                <ScalarProperty Name="mensagem" ColumnName="mensagem" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ListarInstanciaInativa" FunctionName="CALLPLUS_Model.Store.ListarInstanciaInativa" />
+          <FunctionImportMapping FunctionImportName="BuscarDadosDaInstancia" FunctionName="CALLPLUS_Model.Store.BuscarDadosDaInstancia">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.BuscarDadosDaInstancia_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idLicenca" ColumnName="idLicenca" />
+                <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="idCriadoPor" ColumnName="idCriadoPor" />
+                <ScalarProperty Name="dataCriacao" ColumnName="dataCriacao" />
+                <ScalarProperty Name="idProcesso" ColumnName="idProcesso" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Instancia">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.Instancia">
+              <MappingFragment StoreEntitySet="Instancia">
+                <ScalarProperty Name="dataFinalizacao" ColumnName="dataFinalizacao" />
+                <ScalarProperty Name="dataCriacao" ColumnName="dataCriacao" />
+                <ScalarProperty Name="idCriadoPor" ColumnName="idCriadoPor" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+                <ScalarProperty Name="idLicenca" ColumnName="idLicenca" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LicencaPAM">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.LicencaPAM">
+              <MappingFragment StoreEntitySet="LicencaPAM">
+                <ScalarProperty Name="semInstanciaAtiva" ColumnName="semInstanciaAtiva" />
+                <ScalarProperty Name="bonus" ColumnName="bonus" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="dataTermino" ColumnName="dataTermino" />
+                <ScalarProperty Name="dataInicio" ColumnName="dataInicio" />
+                <ScalarProperty Name="idServidorDeInstanciaDoRobo" ColumnName="idServidorDeInstanciaDoRobo" />
+                <ScalarProperty Name="idBancoDeOrigem" ColumnName="idBancoDeOrigem" />
+                <ScalarProperty Name="idOrigemDaConsulta" ColumnName="idOrigemDaConsulta" />
+                <ScalarProperty Name="idProcesso" ColumnName="idProcesso" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="VerificaDuplicidadeDeRegistro" FunctionName="CALLPLUS_Model.Store.VerificaDuplicidadeDeRegistro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.VerificaDuplicidadeDeRegistro_Result">
+                <ScalarProperty Name="idInstancia" ColumnName="idInstancia" />
+                <ScalarProperty Name="dataInicio" ColumnName="dataInicio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelecionarPlanoDaVenda" FunctionName="CALLPLUS_Model.Store.SelecionarPlanoDaVenda">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.SelecionarPlanoDaVenda_Result">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Promocao" ColumnName="Promocao" />
+                <ScalarProperty Name="PlanoDoSite" ColumnName="PlanoDoSite" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="TipoCard" ColumnName="TipoCard" />
+                <ScalarProperty Name="VerificarPlano" ColumnName="VerificarPlano" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MIG_FinalizarRegistroDaInstancia" FunctionName="CALLPLUS_Model.Store.MIG_FinalizarRegistroDaInstancia" />
+          <FunctionImportMapping FunctionImportName="MIG_BuscarVendaParaRegistro" FunctionName="CALLPLUS_Model.Store.MIG_BuscarVendaParaRegistro" >
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.BuscarVendaParaRegistro_Result">
+                <ScalarProperty Name="agencia" ColumnName="agencia" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="conta" ColumnName="conta" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="dataNascimento" ColumnName="dataNascimento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="faturaDigital" ColumnName="faturaDigital" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="nomeMae" ColumnName="nomeMae" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="plano" ColumnName="plano" />
+                <ScalarProperty Name="pontoReferencia" ColumnName="pontoReferencia" />
+                <ScalarProperty Name="produto" ColumnName="produto" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="telCelular" ColumnName="telCelular" />
+                <ScalarProperty Name="telRecado" ColumnName="telRecado" />
+                <ScalarProperty Name="telResidencial" ColumnName="telResidencial" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="vencimento" ColumnName="vencimento" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="statusVenda" ColumnName="statusVenda" />
+                <ScalarProperty Name="COMTA" ColumnName="COMTA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AtualizarVersaoRobo" FunctionName="CALLPLUS_Model.Store.AtualizarVersaoRobo" />
+          <FunctionImportMapping FunctionImportName="BuscarLoginEspecifico" FunctionName="CALLPLUS_Model.Store.BuscarLoginEspecifico" />
+          <EntitySetMapping Name="PlanoDaVenda">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.PlanoDaVenda">
+              <MappingFragment StoreEntitySet="PlanoDaVenda">
+                <ScalarProperty Name="Ativo" ColumnName="Ativo" />
+                <ScalarProperty Name="TipoCard" ColumnName="TipoCard" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Fabricante" ColumnName="Fabricante" />
+                <ScalarProperty Name="Promocao" ColumnName="Promocao" />
+                <ScalarProperty Name="VerificarPlano" ColumnName="VerificarPlano" />
+                <ScalarProperty Name="PlanoDoSite" ColumnName="PlanoDoSite" />
+                <ScalarProperty Name="Processo" ColumnName="Processo" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="APP_ATUALIZAR_DIA_VENCIMENTO_FATURA" FunctionName="CALLPLUS_Model.Store.APP_ATUALIZAR_DIA_VENCIMENTO_FATURA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CALLPLUS_Model.APP_ATUALIZAR_DIA_VENCIMENTO_FATURA_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="diaVencimento" ColumnName="diaVencimento" />
+                <ScalarProperty Name="fechamentoFatura" ColumnName="fechamentoFatura" />
+                <ScalarProperty Name="dataCaptura" ColumnName="dataCaptura" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="TiposLogradouro">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.TiposLogradouro">
+              <MappingFragment StoreEntitySet="TiposLogradouro">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="NomeAbre" ColumnName="NomeAbre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="COMTA" ColumnName="COMTA" />
+                <ScalarProperty Name="backoffice" ColumnName="backoffice" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="dataUltimaUtilizacao" ColumnName="dataUltimaUtilizacao" />
+                <ScalarProperty Name="idModificadoPor" ColumnName="idModificadoPor" />
+                <ScalarProperty Name="dataModificacao" ColumnName="dataModificacao" />
+                <ScalarProperty Name="idCriadoPor" ColumnName="idCriadoPor" />
+                <ScalarProperty Name="dataCriacao" ColumnName="dataCriacao" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MIG_RegistroDaInstancia">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.MIG_RegistroDaInstancia">
+              <MappingFragment StoreEntitySet="MIG_RegistroDaInstancia">
+                <ScalarProperty Name="versaoRobo" ColumnName="versaoRobo" />
+                <ScalarProperty Name="servidorClaro" ColumnName="servidorClaro" />
+                <ScalarProperty Name="COMTAAcessado" ColumnName="COMTAAcessado" />
+                <ScalarProperty Name="COMTA" ColumnName="COMTA" />
+                <ScalarProperty Name="smsNovidadesMarcado" ColumnName="smsNovidadesMarcado" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="idOrigem" ColumnName="idOrigem" />
+                <ScalarProperty Name="idProcesso" ColumnName="idProcesso" />
+                <ScalarProperty Name="idLogin" ColumnName="idLogin" />
+                <ScalarProperty Name="gravadoCRM" ColumnName="gravadoCRM" />
+                <ScalarProperty Name="msisdn" ColumnName="msisdn" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="statusVenda" ColumnName="statusVenda" />
+                <ScalarProperty Name="enderecoCompletoMarcado" ColumnName="enderecoCompletoMarcado" />
+                <ScalarProperty Name="enderecoCompleto" ColumnName="enderecoCompleto" />
+                <ScalarProperty Name="tipoLogradouroMarcado" ColumnName="tipoLogradouroMarcado" />
+                <ScalarProperty Name="tipoLogradouro" ColumnName="tipoLogradouro" />
+                <ScalarProperty Name="telContatoMarcado" ColumnName="telContatoMarcado" />
+                <ScalarProperty Name="telResidencial" ColumnName="telResidencial" />
+                <ScalarProperty Name="cepMarcado" ColumnName="cepMarcado" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="emailMarcado" ColumnName="emailMarcado" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nomeMaeMarcado" ColumnName="nomeMaeMarcado" />
+                <ScalarProperty Name="nomeMae" ColumnName="nomeMae" />
+                <ScalarProperty Name="nascimentoMarcado" ColumnName="nascimentoMarcado" />
+                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
+                <ScalarProperty Name="promocaoMarcada" ColumnName="promocaoMarcada" />
+                <ScalarProperty Name="planoMarcado" ColumnName="planoMarcado" />
+                <ScalarProperty Name="plano" ColumnName="plano" />
+                <ScalarProperty Name="faturaDigitalMarcada" ColumnName="faturaDigitalMarcada" />
+                <ScalarProperty Name="faturaDigital" ColumnName="faturaDigital" />
+                <ScalarProperty Name="dadosBancariosMarcados" ColumnName="dadosBancariosMarcados" />
+                <ScalarProperty Name="codigoBanco" ColumnName="codigoBanco" />
+                <ScalarProperty Name="dadosBancarios" ColumnName="dadosBancarios" />
+                <ScalarProperty Name="tipoPagamento" ColumnName="tipoPagamento" />
+                <ScalarProperty Name="vencimentoMarcado" ColumnName="vencimentoMarcado" />
+                <ScalarProperty Name="vencimento" ColumnName="vencimento" />
+                <ScalarProperty Name="cpfMarcado" ColumnName="cpfMarcado" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="rgMarcado" ColumnName="rgMarcado" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="autorizacao" ColumnName="autorizacao" />
+                <ScalarProperty Name="protocolo" ColumnName="protocolo" />
+                <ScalarProperty Name="dataTermino" ColumnName="dataTermino" />
+                <ScalarProperty Name="dataInicio" ColumnName="dataInicio" />
+                <ScalarProperty Name="idControle" ColumnName="idControle" />
+                <ScalarProperty Name="idVenda" ColumnName="idVenda" />
+                <ScalarProperty Name="idStatus" ColumnName="idStatus" />
+                <ScalarProperty Name="idInstancia" ColumnName="idInstancia" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusDoRegistro">
+            <EntityTypeMapping TypeName="CALLPLUS_Model.StatusDoRegistro">
+              <MappingFragment StoreEntitySet="StatusDoRegistro">
+                <ScalarProperty Name="divisao" ColumnName="divisao" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="idStatusNovoCRM" ColumnName="idStatusNovoCRM" />
+                <ScalarProperty Name="idStatusCRM" ColumnName="idStatusCRM" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

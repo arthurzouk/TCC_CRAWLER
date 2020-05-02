@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c73bc9e5d1a45f180c148a4d48ed62e" Name="Diagram1" ZoomLevel="54">
+        <EntityTypeShape EntityType="CALLPLUS_Model.Processo" Width="1.5" PointX="3.375" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.Etapa" Width="1.5" PointX="0.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.MensagemDoStatus" Width="2" PointX="0.5" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_MensagemDoStatus_Etapa" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.Instancia" Width="1.5" PointX="8.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.LicencaPAM" Width="1.5" PointX="6.375" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_Instancia_LicencaPAM" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_LicencaPAM_Processo" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.PlanoDaVenda" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.TiposLogradouro" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.Login" Width="1.5" PointX="5.375" PointY="10" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_Instancia_Login" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.MIG_RegistroDaInstancia" Width="1.5" PointX="11" PointY="1.375" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_Instancia" />
+        <EntityTypeShape EntityType="CALLPLUS_Model.StatusDoRegistro" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_MensagemDoStatus_StatusDoRegistro" />
+        <AssociationConnector Association="CALLPLUS_Model.FK_RegistroDaInstanciaMIG_StatusDoRegistro" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
